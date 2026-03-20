@@ -48,7 +48,7 @@ export default function Experience() {
                   delay: i * 0.1,
                   ease: [0.21, 0.47, 0.32, 0.98] 
                 }}
-                className="exp-card group py-12 border-b border-border/50 hover:px-6 transition-all cursor-pointer relative"
+                className="exp-card group py-12 border-b border-border/50 hover:px-6 transition-all cursor-pointer relative overflow-hidden"
                 onMouseEnter={() => setHoveredExp(i)}
                 onMouseLeave={() => setHoveredExp(null)}
             >

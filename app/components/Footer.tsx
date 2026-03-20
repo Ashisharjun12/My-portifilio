@@ -48,7 +48,7 @@ export default function Footer() {
           <p className="text-dim font-mono text-xs uppercase tracking-widest text-right">
             Designed & Built by <br /> <span className="text-white font-black">ASHISH KUMAR</span>
           </p>
-          <p className="text-[10px] text-white/20 mt-4 uppercase">© 2024 ALL RIGHTS RESERVED</p>
+          <p className="text-[10px] text-white/20 mt-4 uppercase">© 2026 ALL RIGHTS RESERVED</p>
         </div>
       </div>
     </footer>

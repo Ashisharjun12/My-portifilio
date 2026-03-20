@@ -1,74 +1,51 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import React from "react";
+import { motion } from "framer-motion";
 import { SKILL_LIST_STRING } from "@/lib/data";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Skills() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const skillsList = SKILL_LIST_STRING.split(",");
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const icons = containerRef.current.querySelectorAll(".floating-icon");
-    
-    icons.forEach((icon) => {
-      // Subtle floating animation for each icon
-      gsap.to(icon, {
-        x: "random(-10, 10)",
-        y: "random(-15, 15)",
-        rotation: "random(-5, 5)",
-        duration: "random(4, 6)",
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: Math.random() * 2
-      });
-    });
-
-    // Fade in with ScrollTrigger
-    gsap.from(containerRef.current.querySelectorAll("h3, .floating-icon"), {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          once: true,
-          onRefresh: (self) => {
-            if (self.progress > 0) {
-              gsap.set(containerRef.current!.querySelectorAll("h3, .floating-icon"), { opacity: 1, y: 0 });
-            }
-          }
-        },
-        opacity: 0,
-        y: 20,
-        stagger: 0.05,
-        duration: 1,
-        ease: "power3.out"
-    });
-  }, []);
-
   return (
-    <section className="py-10 md:py-16 relative min-h-[500px] flex flex-col items-center justify-center overflow-visible">
+    <section className="py-10 md:py-16 relative min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[300px] bg-accent/5 rounded-full blur-[100px] -z-10" />
 
-      <div className="text-center mb-20">
-        <h3 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8]">
+      <div className="text-center mb-8 sm:mb-20 px-6">
+        <motion.h3 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8 }}
+          className="text-2xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8]"
+        >
             TECHNOLOGY <span className="text-accent italic underline">ARSENAL.</span>
-        </h3>
+        </motion.h3>
       </div>
 
       <div 
-        ref={containerRef}
-        className="max-w-4xl w-full flex flex-wrap justify-center items-center gap-8 md:gap-14 px-6 mt-10"
+        className="max-w-4xl w-full flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-14 px-6 mt-10"
       >
         {skillsList.map((skill, i) => (
-          <div 
+          <motion.div 
             key={i}
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ 
+              duration: 0.5, 
+              delay: i * 0.03,
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              y: { duration: 3 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }
+            }}
+            animate={{
+              y: [0, -10, 0],
+              rotate: [0, 2, 0, -2, 0]
+            }}
             className="floating-icon group relative cursor-pointer"
           >
             <img 
@@ -83,7 +60,7 @@ export default function Skills() {
                     {skill}
                 </span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

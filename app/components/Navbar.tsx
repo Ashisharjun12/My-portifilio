@@ -35,13 +35,13 @@ export default function Navbar() {
   return (
     <header 
       className={cn(
-        "fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 ease-in-out",
-        scrolled ? "w-[95%] md:w-[85%] lg:w-[75%]" : "w-[92%] md:w-[75%] lg:w-[60%]"
+        "fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 ease-in-out w-[92%] sm:w-[90%] md:w-[85%] lg:w-[75%]",
+        scrolled ? "opacity-100" : "opacity-100"
       )}
     >
-      <div className="bg-surface/70 backdrop-blur-2xl border border-border/40 rounded-full px-5 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-        <Link href="/" className="flex items-center gap-3 group">
-          <span className="text-lg md:text-xl font-black tracking-tighter uppercase group-hover:text-accent transition-colors">
+      <div className="bg-surface/70 backdrop-blur-2xl border border-border/40 rounded-full px-4 sm:px-5 md:px-8 py-2.5 md:py-4 flex items-center justify-between shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
+          <span className="text-base sm:text-lg md:text-xl font-black tracking-tighter uppercase group-hover:text-accent transition-colors">
             Ashish<span className="text-accent">.</span>
           </span>
         </Link>
