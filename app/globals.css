@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-accent: #f97316;
+  --color-accent-foreground: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-active: #cbd5e1;
+  --color-dim: #64748b;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --color-background: #060a10;
+  --color-foreground: #dde8f5;
+  --color-accent: #f97316;
+  --color-accent-foreground: #ffffff;
+  --color-surface: #0c1522;
+  --color-surface-hover: #101d2e;
+  --color-border: #131f30;
+  --color-border-active: #1a2d44;
+  --color-dim: #94a3b8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: auto; /* Managed by Lenis */
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased overflow-x-hidden transition-colors duration-300;
+    font-family: var(--font-mono);
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .bg-glass {
+    @apply bg-background/40 backdrop-blur-xl border border-border rounded-3xl;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400;
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
 }
